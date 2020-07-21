@@ -1,4 +1,4 @@
-module github.com/i-coder-robot/go-micro-action
+module github.com/i-coder-robot/go-micro-action-user
 
 go 1.13
 
