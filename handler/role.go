@@ -3,8 +3,8 @@ package handler
 import (
 	"context"
 	"fmt"
-	pb "github.com/i-coder-robot/go-micro-action/user/proto/role"
-	"github.com/i-coder-robot/go-micro-action/user/service/repository"
+	pb "github.com/i-coder-robot/go-micro-action-user/user/proto/role"
+	"github.com/i-coder-robot/go-micro-action-user/user/service/repository"
 )
 
 type Role struct {
@@ -41,7 +41,7 @@ func (srv *Role) Get(ctx context.Context, req *pb.Request, res *pb.Response) (er
 }
 
 func (srv *Role) Create(ctx context.Context, req *pb.Request, res *pb.Response) (err error) {
-	_, err := srv.Repo.Create(req.Role)
+	_, err = srv.Repo.Create(req.Role)
 	if err != nil {
 		res.Valid = false
 		return fmt.Errorf("添加角色失败 ")

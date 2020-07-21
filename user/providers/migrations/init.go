@@ -1,7 +1,7 @@
 package migrations
 
 import (
-	"github.com/i-coder-robot/go-micro-action/user/service/repository"
+	"github.com/i-coder-robot/go-micro-action-user/user/service/repository"
 	"github.com/lecex/core/env"
 )
 

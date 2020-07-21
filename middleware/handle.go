@@ -3,7 +3,7 @@ package middleware
 import (
 	"context"
 	"errors"
-	client "github.com/i-coder-robot/go-micro-action-core/core/client"
+	client "github.com/i-coder-robot/go-micro-action-core/client"
 	PB "github.com/i-coder-robot/go-micro-action-user/user/proto/permission"
 	"github.com/micro/go-micro/v2/metadata"
 	"github.com/micro/go-micro/v2/server"

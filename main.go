@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/i-coder-robot/go-micro-action/config"
-	"github.com/i-coder-robot/go-micro-action/handler"
+	"github.com/i-coder-robot/go-micro-action-user/config"
+	"github.com/i-coder-robot/go-micro-action-user/handler"
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/util/log"
 )

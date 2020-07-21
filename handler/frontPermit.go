@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/go-playground/locales/vai_Latn"
-	pb "github.com/i-coder-robot/go-micro-action/user/proto/frontPermit"
-	"github.com/i-coder-robot/go-micro-action/user/service/repository"
+	pb "github.com/i-coder-robot/go-micro-action-user/user/proto/frontPermit"
+	"github.com/i-coder-robot/go-micro-action-user/user/service/repository"
 )
 
 type FrontPermit struct {

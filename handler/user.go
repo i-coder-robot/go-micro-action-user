@@ -3,8 +3,8 @@ package handler
 import (
 	"context"
 	"fmt"
-	pb "github.com/i-coder-robot/go-micro-action/user/proto/user"
-	"github.com/i-coder-robot/go-micro-action/user/service/repository"
+	pb "github.com/i-coder-robot/go-micro-action-user/user/proto/user"
+	"github.com/i-coder-robot/go-micro-action-user/user/service/repository"
 	"golang.org/x/crypto/bcrypt"
 )
 

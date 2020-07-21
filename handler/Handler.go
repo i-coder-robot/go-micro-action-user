@@ -1,9 +1,9 @@
 package handler
 
 import (
-	userPB "github.com/i-coder-robot/go-micro-action/user/proto/user"
-	db "github.com/i-coder-robot/go-micro-action/user/providers/database"
-	"github.com/i-coder-robot/go-micro-action/user/service/repository"
+	userPB "github.com/i-coder-robot/go-micro-action-user/user/proto/user"
+	db "github.com/i-coder-robot/go-micro-action-user/user/providers/database"
+	"github.com/i-coder-robot/go-micro-action-user/user/service/repository"
 	"github.com/micro/go-micro/v2/server"
 )
 
