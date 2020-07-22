@@ -4,12 +4,11 @@ import (
 	"context"
 	"errors"
 	client "github.com/i-coder-robot/go-micro-action-core/client"
+	authPb "github.com/i-coder-robot/go-micro-action-user/user/proto/auth"
+	casbinPb "github.com/i-coder-robot/go-micro-action-user/user/proto/casbin"
 	PB "github.com/i-coder-robot/go-micro-action-user/user/proto/permission"
 	"github.com/micro/go-micro/v2/metadata"
 	"github.com/micro/go-micro/v2/server"
-
-	authPb "github.com/i-coder-robot/go-micro-action-user/user/proto/auth"
-	casbinPb "github.com/i-coder-robot/go-micro-action-user/user/proto/casbin"
 )
 // Handler 处理器
 // 包含一些高阶函数比如中间件常用的 token 验证等
