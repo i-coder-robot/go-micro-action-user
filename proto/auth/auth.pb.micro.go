@@ -42,8 +42,12 @@ func NewAuthEndpoints() []*api.Endpoint {
 // Client API for Auth service
 
 type AuthService interface {
+	// 用户验证授权
 	Auth(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	// token 验证
 	ValidateToken(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	// 只限微服务之间调用
+	// 根据用户ID获取授权
 	AuthById(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 }
 
@@ -92,8 +96,12 @@ func (c *authService) AuthById(ctx context.Context, in *Request, opts ...client.
 // Server API for Auth service
 
 type AuthHandler interface {
+	// 用户验证授权
 	Auth(context.Context, *Request, *Response) error
+	// token 验证
 	ValidateToken(context.Context, *Request, *Response) error
+	// 只限微服务之间调用
+	// 根据用户ID获取授权
 	AuthById(context.Context, *Request, *Response) error
 }
 

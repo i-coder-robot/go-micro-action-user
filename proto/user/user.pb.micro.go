@@ -42,11 +42,17 @@ func NewUsersEndpoints() []*api.Endpoint {
 // Client API for Users service
 
 type UsersService interface {
+	// 用过 用户名、邮箱、手机 查询用户是否存在
 	Exist(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	// 获取用户列表
 	List(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	// 根据 唯一 获取用户
 	Get(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	// 创建用户
 	Create(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	// 更新用户
 	Update(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	// 删除用户
 	Delete(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 }
 
@@ -125,11 +131,17 @@ func (c *usersService) Delete(ctx context.Context, in *Request, opts ...client.C
 // Server API for Users service
 
 type UsersHandler interface {
+	// 用过 用户名、邮箱、手机 查询用户是否存在
 	Exist(context.Context, *Request, *Response) error
+	// 获取用户列表
 	List(context.Context, *Request, *Response) error
+	// 根据 唯一 获取用户
 	Get(context.Context, *Request, *Response) error
+	// 创建用户
 	Create(context.Context, *Request, *Response) error
+	// 更新用户
 	Update(context.Context, *Request, *Response) error
+	// 删除用户
 	Delete(context.Context, *Request, *Response) error
 }
 

@@ -6,6 +6,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-log/log v0.1.0
 	github.com/go-playground/locales v0.13.0
+	github.com/gogo/protobuf v1.2.1
 	github.com/golang/protobuf v1.4.2
 	github.com/i-coder-robot/go-micro-action-core v0.0.0-20200721045547-b024a25b2bec
 	github.com/jinzhu/gorm v1.9.15
