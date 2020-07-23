@@ -4,10 +4,10 @@ import (
 	"context"
 	"errors"
 	"github.com/go-log/log"
-	pb "github.com/i-coder-robot/go-micro-action-user/user/proto/auth"
-	userPb "github.com/i-coder-robot/go-micro-action-user/user/proto/user"
-	"github.com/i-coder-robot/go-micro-action-user/user/service"
-	"github.com/i-coder-robot/go-micro-action-user/user/service/repository"
+	pb "github.com/i-coder-robot/go-micro-action-user/proto/auth"
+	userPb "github.com/i-coder-robot/go-micro-action-user/proto/user"
+	"github.com/i-coder-robot/go-micro-action-user/service"
+	"github.com/i-coder-robot/go-micro-action-user/service/repository"
 	"golang.org/x/crypto/bcrypt"
 )
 

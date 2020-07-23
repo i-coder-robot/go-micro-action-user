@@ -2,7 +2,7 @@ package repository
 
 import (
 	"fmt"
-	pb "github.com/i-coder-robot/go-micro-action-user/user/proto/user"
+	pb "github.com/i-coder-robot/go-micro-action-user/proto/user"
 	"github.com/jinzhu/gorm"
 	"github.com/micro/go-micro/v2/util/log"
 )

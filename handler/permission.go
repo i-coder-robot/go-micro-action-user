@@ -3,8 +3,8 @@ package handler
 import (
 	"context"
 	"fmt"
-	pb "github.com/i-coder-robot/go-micro-action-user/user/proto/permission"
-	"github.com/i-coder-robot/go-micro-action-user/user/service/repository"
+	pb "github.com/i-coder-robot/go-micro-action-user/proto/permission"
+	"github.com/i-coder-robot/go-micro-action-user/service/repository"
 )
 
 type Permission struct {

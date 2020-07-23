@@ -3,7 +3,7 @@ package repository
 import (
 	"fmt"
 	"github.com/go-log/log"
-	pb "github.com/i-coder-robot/go-micro-action-user/user/proto/permission"
+	pb "github.com/i-coder-robot/go-micro-action-user/proto/permission"
 	"github.com/jinzhu/gorm"
 )
 

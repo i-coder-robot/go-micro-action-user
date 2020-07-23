@@ -2,7 +2,7 @@ package service
 
 import (
 	"github.com/dgrijalva/jwt-go"
-	"github.com/i-coder-robot/go-micro-action-user/user/proto/auth"
+	"github.com/i-coder-robot/go-micro-action-user/proto/auth"
 	"github.com/lecex/core/env"
 	"strconv"
 	"time"
