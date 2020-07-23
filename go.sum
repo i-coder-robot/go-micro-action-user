@@ -259,6 +259,10 @@ github.com/i-coder-robot/go-micro-action-core v0.0.0-20200723002025-d25d275116f8
 github.com/i-coder-robot/go-micro-action-core v0.0.0-20200723002025-d25d275116f8/go.mod h1:UQLKZP1kuuuZOxuyksOnKYrWSejVhtUZ0MEvzFvAJDk=
 github.com/i-coder-robot/go-micro-action-core v0.0.1 h1:o58GAw7fR3XtPM6KgjpWEK0cQzteQW1PetNljrhCjGw=
 github.com/i-coder-robot/go-micro-action-core v0.0.1/go.mod h1:UQLKZP1kuuuZOxuyksOnKYrWSejVhtUZ0MEvzFvAJDk=
+github.com/i-coder-robot/go-micro-action-core v0.0.2 h1:lkNqZjXz/ENHvhZEsDFDktDaCZxbHrkjnVrVSMLr1QQ=
+github.com/i-coder-robot/go-micro-action-core v0.0.2/go.mod h1:UQLKZP1kuuuZOxuyksOnKYrWSejVhtUZ0MEvzFvAJDk=
+github.com/i-coder-robot/go-micro-action-core v0.0.4 h1:WDtQCQXZmTOugu3eVAHE1KpDaJeJTwEac3AabkctZHs=
+github.com/i-coder-robot/go-micro-action-core v0.0.4/go.mod h1:UQLKZP1kuuuZOxuyksOnKYrWSejVhtUZ0MEvzFvAJDk=
 github.com/i-coder-robot/go-micro-action-user v0.0.0-20200721032456-45dc2a8751e8/go.mod h1:5TXNdLtG9Jlq/vnAKI+ls9KsusVN1YTVLzGfy2ViLbA=
 github.com/iij/doapi v0.0.0-20190504054126-0bbf12d6d7df/go.mod h1:QMZY7/J/KSQEhKWFeDesPjMj+wCHReeknARU3wqlyN4=
 github.com/ijc/Gotty v0.0.0-20170406111628-a8b993ba6abd/go.mod h1:3LVOLeyx9XVvwPgrt2be44XgSqndprz1G18rSk8KD84=
