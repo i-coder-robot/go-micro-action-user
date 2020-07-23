@@ -5,7 +5,6 @@ import (
 	"github.com/i-coder-robot/go-micro-action-user/handler"
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/util/log"
-
 )
 
 func main() {

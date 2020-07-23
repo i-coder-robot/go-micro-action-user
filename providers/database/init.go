@@ -1,8 +1,9 @@
 package database
 
 import (
+	"github.com/i-coder-robot/go-micro-action-core/env"
+	tgorm "github.com/i-coder-robot/go-micro-action-core/gorm"
 	"github.com/jinzhu/gorm"
-	"github.com/lecex/core/env"
 	"github.com/micro/go-micro/v2/util/log"
 )
 
@@ -26,8 +27,10 @@ type DBConf struct {
 	Charset string
 }
 
-func GetConnection() (*gorm.DB, error) {
-	dbConf := &DBConf{
+
+func init() {
+	var err error
+	conf := &tgorm.Config{
 		Driver: env.Getenv("DB_DRIVER", "mysql"),
 		// Host 主机地址
 		Host: env.Getenv("DB_HOST", "127.0.0.1"),
@@ -36,29 +39,13 @@ func GetConnection() (*gorm.DB, error) {
 		// User 用户名
 		User: env.Getenv("DB_USER", "root"),
 		// Password 密码
-		Password: env.Getenv("DB_PASSWORD", "123456"),
+		Password: env.Getenv("DB_PASSWORD", "smartwell"),
 		// DbName 数据库名称
 		DbName: env.Getenv("DB_NAME", "user"),
 		// Charset 数据库编码
 		Charset: env.Getenv("DB_CHARSET", "utf8"),
 	}
-
-	db, err := gorm.Open("mysql", dbConf.User+":"+dbConf.Password+"@tcp("+dbConf.Host+":"+dbConf.Port+")/"+dbConf.DbName+"?charset=utf8")
-	if err != nil {
-		panic("连接数据库失败")
-	}
-	db.SingularTable(true)
-	//defer db.Close()
-	if err != nil {
-		panic(err)
-		return nil, err
-	}
-	return db, nil
-}
-
-func init() {
-	var err error
-	DB, err = GetConnection()
+	DB, err = tgorm.Connection(conf)
 	if err != nil {
 		log.Fatalf("connect error: %v\n", err)
 	}
