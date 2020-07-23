@@ -36,7 +36,7 @@ func (srv *TokenService) Decode(tokenStr string) (*CustomClaims, error) {
 }
 
 func (srv *TokenService) Encode(user *auth.User) (string, error) {
-	validityPeriod, _ := strconv.ParseInt(env.Getenv("TOKEN_VALIDITY_PERIOD", 3), 10, 64)
+	validityPeriod, _ := strconv.ParseInt(env.Getenv("TOKEN_VALIDITY_PERIOD", "3"), 10, 64)
 	expireTime := time.Now().Add(time.Hour * 24 * time.Duration(validityPeriod)).Unix()
 	claims := CustomClaims{
 		user,

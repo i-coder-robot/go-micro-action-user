@@ -12,9 +12,16 @@ type User struct {
 	Repo repository.User
 }
 
-//func (srv *User )()  {
-//
-//}
+func (srv *User ) List(ctx context.Context,req *pb.Request,res *pb.Response) (err error) {
+	users, err := srv.Repo.List(req.ListQuery)
+	total, err := srv.Repo.Total(req.ListQuery)
+	if err != nil {
+		return err
+	}
+	res.Total = total
+	res.Users = users
+	return err
+}
 
 func (srv *User) Exist(ctx context.Context, req *pb.Request, res *pb.Response) (err error) {
 	res.Valid = srv.Repo.Exist(req.User)

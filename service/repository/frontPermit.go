@@ -9,9 +9,9 @@ import (
 
 type FrontPermit interface {
 	Create(frontPermit *pb.FrontPermit) (*pb.FrontPermit, error)
-	Delete(frontPermit FrontPermit) (bool, error)
+	Delete(frontPermit *pb.FrontPermit) (bool, error)
 	Update(frontPermit *pb.FrontPermit) (bool, error)
-	Get(frontPermit FrontPermit) (*pb.FrontPermit, error)
+	Get(frontPermit *pb.FrontPermit) (*pb.FrontPermit, error)
 	All(req *pb.Request) ([]*pb.FrontPermit, error)
 	List(req *pb.ListQuery) ([]*pb.FrontPermit, error)
 	Total(req *pb.ListQuery) (int64, error)
@@ -63,7 +63,7 @@ func (repo *FrontPermitRepository) Get(frontPermit *pb.FrontPermit) (*pb.FrontPe
 	return frontPermit, nil
 }
 
-func (repo PermissionRepository) Create(p *pb.FrontPermit) (*pb.FrontPermit, error) {
+func (repo *FrontPermitRepository) Create(p *pb.FrontPermit) (*pb.FrontPermit, error) {
 	err := repo.DB.Create(p).Error
 	if err != nil {
 		log.Log(err)

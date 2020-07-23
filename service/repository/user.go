@@ -59,7 +59,7 @@ func (repo UserRepository) List(req *pb.ListQuery) (users []*pb.User, err error)
 
 func (repo *UserRepository) Total(req *pb.ListQuery) (total int64, err error) {
 	users := []pb.User{}
-	db := *repo.DB
+	db := repo.DB
 	if req.Where != "" {
 		db = db.Where(req.Where)
 	}
