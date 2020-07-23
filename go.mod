@@ -8,7 +8,7 @@ require (
 	github.com/go-playground/locales v0.13.0
 	github.com/gogo/protobuf v1.2.1
 	github.com/golang/protobuf v1.4.2
-	github.com/i-coder-robot/go-micro-action-core v0.0.0-20200721045547-b024a25b2bec
+	github.com/i-coder-robot/go-micro-action-core v0.0.0-20200723002025-d25d275116f8
 	github.com/jinzhu/gorm v1.9.15
 	github.com/lecex/core v1.0.11
 	github.com/micro/go-micro v1.18.0

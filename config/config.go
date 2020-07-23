@@ -1,13 +1,13 @@
 package config
 
-import "github.com/micro/go-micro/config"
+import (
+	"github.com/i-coder-robot/go-micro-action-core/config"
+	"github.com/i-coder-robot/go-micro-action-core/env"
+)
 
-type MicroConfig struct {
-	Name    string
-	Version string
-}
-
-var Conf config.Config = MicroConfig{
-	Name:    "go.micro.srv.user",
+// Conf 配置
+var Conf config.Config = config.Config{
+	Name:    env.Getenv("MICRO_API_NAMESPACE", "go.micro.srv.") + "user",
 	Version: "latest",
 }
+
