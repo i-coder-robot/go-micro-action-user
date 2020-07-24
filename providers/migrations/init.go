@@ -1,8 +1,18 @@
 package migrations
 
 import (
+	"context"
+	"github.com/i-coder-robot/go-micro-action-core/env"
+	"github.com/i-coder-robot/go-micro-action-user/handler"
+	casbinPB "github.com/i-coder-robot/go-micro-action-user/proto/casbin"
+	frontPermitPB "github.com/i-coder-robot/go-micro-action-user/proto/frontPermit"
+	permissionPB "github.com/i-coder-robot/go-micro-action-user/proto/permission"
+	rolePB "github.com/i-coder-robot/go-micro-action-user/proto/role"
+	userPB "github.com/i-coder-robot/go-micro-action-user/proto/user"
+	"github.com/i-coder-robot/go-micro-action-user/providers/casbin"
+	db "github.com/i-coder-robot/go-micro-action-user/providers/database"
 	"github.com/i-coder-robot/go-micro-action-user/service/repository"
-	"github.com/lecex/core/env"
+	"github.com/micro/go-micro/v2/util/log"
 )
 
 func init() {

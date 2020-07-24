@@ -3,8 +3,11 @@ module github.com/i-coder-robot/go-micro-action-user
 go 1.14
 
 require (
+	github.com/casbin/casbin v1.9.1
+	github.com/casbin/gorm-adapter v1.0.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-log/log v0.1.0
+	github.com/go-sql-driver/mysql v1.5.0
 	github.com/gogo/protobuf v1.3.1
 	github.com/golang/protobuf v1.4.2
 	github.com/i-coder-robot/go-micro-action-core v0.0.7

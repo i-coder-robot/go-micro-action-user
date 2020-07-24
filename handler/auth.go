@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/go-log/log"
 	pb "github.com/i-coder-robot/go-micro-action-user/proto/auth"
 	userPb "github.com/i-coder-robot/go-micro-action-user/proto/user"
@@ -37,6 +38,7 @@ func (srv *Auth) AuthById(ctx context.Context, req *pb.Request, res *pb.Response
 }
 
 func (srv *Auth) Auth(ctx context.Context, req *pb.Request, res *pb.Response) (err error) {
+	fmt.Println("Auth.Auth")
 	user, err := srv.Repo.Get(&userPb.User{
 		Id:       req.User.Id,
 		Username: req.User.Username,
