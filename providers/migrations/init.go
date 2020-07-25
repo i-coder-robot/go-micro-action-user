@@ -2,7 +2,6 @@ package migrations
 
 import (
 	"context"
-	"fmt"
 	"github.com/i-coder-robot/go-micro-action-core/env"
 	"github.com/i-coder-robot/go-micro-action-user/handler"
 	casbinPB "github.com/i-coder-robot/go-micro-action-user/proto/casbin"
@@ -17,14 +16,12 @@ import (
 )
 
 func init() {
-	fmt.Println("初始化数据库 开始....")
 	user()
 	frontPermit()
 	permission()
 	role()
 
 	seeds()
-	fmt.Println("初始化数据库 结束....")
 }
 
 // user 用户数据迁移

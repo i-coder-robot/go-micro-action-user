@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/casbin/casbin"
 	gormadapter "github.com/casbin/gorm-adapter"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/i-coder-robot/go-micro-action-core/env"
 )
 
