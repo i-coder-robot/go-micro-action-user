@@ -1,6 +1,11 @@
 package handler
 
 import (
+	authPB "github.com/i-coder-robot/go-micro-action-user/proto/auth"
+	casbinPB "github.com/i-coder-robot/go-micro-action-user/proto/casbin"
+	frontPermitPB "github.com/i-coder-robot/go-micro-action-user/proto/frontPermit"
+	permissionPB "github.com/i-coder-robot/go-micro-action-user/proto/permission"
+	rolePB "github.com/i-coder-robot/go-micro-action-user/proto/role"
 	userPB "github.com/i-coder-robot/go-micro-action-user/proto/user"
 	"github.com/i-coder-robot/go-micro-action-user/providers/casbin"
 	db "github.com/i-coder-robot/go-micro-action-user/providers/database"
@@ -15,6 +20,11 @@ type Handler struct {
 
 func (srv *Handler) Register() {
 	userPB.RegisterUsersHandler(srv.Server, srv.User())
+	authPB.RegisterAuthHandler(srv.Server, srv.Auth())                       // token 服务实现
+	frontPermitPB.RegisterFrontPermitsHandler(srv.Server, srv.FrontPermit()) // 前端权限服务实现
+	permissionPB.RegisterPermissionsHandler(srv.Server, srv.Permission())    // 权限服务实现
+	rolePB.RegisterRolesHandler(srv.Server, srv.Role())                      // 角色服务实现
+	casbinPB.RegisterCasbinHandler(srv.Server, srv.Casbin())
 }
 
 func (srv *Handler) User() *User {
@@ -25,25 +35,26 @@ func (srv *Handler) User() *User {
 
 // Auth 授权管理服务实现
 func (srv *Handler) Auth() *Auth {
-	return &Auth{&service.TokenService{}, &repository.UserRepository{db.DB}}
+	return &Auth{TokenService: &service.TokenService{},
+		Repo: &repository.UserRepository{DB: db.DB}}
 }
 
 // FrontPermit 前端权限管理服务实现
 func (srv *Handler) FrontPermit() *FrontPermit {
-	return &FrontPermit{&repository.FrontPermitRepository{db.DB}}
+	return &FrontPermit{Repo:&repository.FrontPermitRepository{DB:db.DB}}
 }
 
 // Permission 权限管理服务实现
 func (srv *Handler) Permission() *Permission {
-	return &Permission{&repository.PermissionRepository{db.DB}}
+	return &Permission{Repo:&repository.PermissionRepository{DB:db.DB}}
 }
 
 // Role 角色管理服务实现
 func (srv *Handler) Role() *Role {
-	return &Role{&repository.RoleRepository{db.DB}}
+	return &Role{Repo:&repository.RoleRepository{DB:db.DB}}
 }
 
 // Casbin 权限管理服务实现
 func (srv *Handler) Casbin() *Casbin {
-	return &Casbin{casbin.Enforcer}
+	return &Casbin{Enforcer: casbin.Enforcer}
 }
