@@ -2,6 +2,7 @@ package migrations
 
 import (
 	"context"
+	"fmt"
 	"github.com/i-coder-robot/go-micro-action-core/env"
 	"github.com/i-coder-robot/go-micro-action-user/handler"
 	casbinPB "github.com/i-coder-robot/go-micro-action-user/proto/casbin"
@@ -16,12 +17,14 @@ import (
 )
 
 func init() {
+	fmt.Println("初始化数据库 开始....")
 	user()
 	frontPermit()
 	permission()
 	role()
 
 	seeds()
+	fmt.Println("初始化数据库 结束....")
 }
 
 // user 用户数据迁移
@@ -116,8 +119,8 @@ func seeds() {
 
 func CreateRole() {
 	// 角色服务实现
-	repo := &repository.RoleRepository{db.DB}
-	h := handler.Role{repo}
+	repo := &repository.RoleRepository{DB: db.DB}
+	h := handler.Role{Repo: repo}
 	req := &rolePB.Request{
 		Role: &rolePB.Role{
 			Label:       `root`,
@@ -134,8 +137,8 @@ func CreateRole() {
 // CreateUser 填充文件
 func CreateUser() {
 	password := env.Getenv("ADMIN_PASSWORD", "admin123")
-	repo := &repository.UserRepository{db.DB}
-	h := handler.User{repo}
+	repo := &repository.UserRepository{DB: db.DB}
+	h := handler.User{Repo: repo}
 	req := &userPB.Request{
 		User: &userPB.User{
 			Username: `admin`,
@@ -155,7 +158,7 @@ func CreateUser() {
 
 // AddRole 增加用户角色
 func addRole(userID string, role string) {
-	h := handler.Casbin{casbin.Enforcer}
+	h := handler.Casbin{Enforcer: casbin.Enforcer}
 	req := &casbinPB.Request{
 		Label: userID,
 		Role:  role,

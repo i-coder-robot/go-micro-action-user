@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/i-coder-robot/go-micro-action-user/config"
 	"github.com/i-coder-robot/go-micro-action-user/handler"
+	_ "github.com/i-coder-robot/go-micro-action-user/providers/migrations"
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/util/log"
 )

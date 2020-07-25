@@ -2,11 +2,8 @@ package casbin
 
 import (
 	"fmt"
-
 	"github.com/casbin/casbin"
 	gormadapter "github.com/casbin/gorm-adapter"
-	_ "github.com/go-sql-driver/mysql"
-	
 	"github.com/i-coder-robot/go-micro-action-core/env"
 )
 
@@ -25,7 +22,7 @@ func init() {
 	// User 用户名
 	User := env.Getenv("DB_USER", "root")
 	// Password 密码
-	Password := env.Getenv("DB_PASSWORD", "123456")
+	Password := env.Getenv("DB_PASSWORD", "smartwell")
 	// DbName 数据库名称
 	DbName := env.Getenv("DB_NAME", "user")
 	// Charset 数据库编码

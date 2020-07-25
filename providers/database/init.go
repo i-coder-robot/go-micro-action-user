@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"github.com/i-coder-robot/go-micro-action-core/env"
 	tgorm "github.com/i-coder-robot/go-micro-action-core/gorm"
 	"github.com/jinzhu/gorm"
@@ -29,6 +30,7 @@ type DBConf struct {
 
 
 func init() {
+	fmt.Println("数据库 init")
 	var err error
 	conf := &tgorm.Config{
 		Driver: env.Getenv("DB_DRIVER", "mysql"),
@@ -49,5 +51,5 @@ func init() {
 	if err != nil {
 		log.Fatalf("connect error: %v\n", err)
 	}
-
+	fmt.Println("数据库 init 结束...")
 }
