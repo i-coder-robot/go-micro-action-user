@@ -11,31 +11,6 @@ type Permission struct {
 	Repo repository.Permission
 }
 
-func (srv *Permission) UpdateOrCreate(ctx context.Context, req *pb.Request, res *pb.Response) (err error) {
-	p := pb.Permission{}
-	p.Service = req.Permission.Service
-	p.Method = req.Permission.Method
-	permission, err := srv.Repo.Get(&p)
-	if permission != nil {
-		_, err = srv.Repo.Create(req.Permission)
-	} else {
-		req.Permission.Id = permission.Id
-		_, err = srv.Repo.Update(req.Permission)
-	}
-	return err
-}
-
-func (srv *Permission) Sync(ctx context.Context, req *pb.Request, res *pb.Response) (err error) {
-	for _, p := range req.Permissions {
-		req.Permission = p
-		err = srv.UpdateOrCreate(ctx, req, res)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
 func (srv *Permission) All(ctx context.Context, req *pb.Request, res *pb.Response) (err error) {
 	permissions, err := srv.Repo.All(req)
 	if err != nil {
@@ -94,3 +69,30 @@ func (srv *Permission) Delete(ctx context.Context, req *pb.Request, res *pb.Resp
 	res.Valid = valid
 	return err
 }
+
+func (srv *Permission) UpdateOrCreate(ctx context.Context, req *pb.Request, res *pb.Response) (err error) {
+	p := pb.Permission{}
+	p.Service = req.Permission.Service
+	p.Method = req.Permission.Method
+	permission, err := srv.Repo.Get(&p)
+	if permission != nil {
+		_, err = srv.Repo.Create(req.Permission)
+	} else {
+		req.Permission.Id = permission.Id
+		_, err = srv.Repo.Update(req.Permission)
+	}
+	return err
+}
+
+func (srv *Permission) Sync(ctx context.Context, req *pb.Request, res *pb.Response) (err error) {
+	for _, p := range req.Permissions {
+		req.Permission = p
+		err = srv.UpdateOrCreate(ctx, req, res)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+

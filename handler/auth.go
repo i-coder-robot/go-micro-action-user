@@ -17,26 +17,6 @@ type Auth struct {
 	Repo         repository.User
 }
 
-func (srv *Auth) AuthById(ctx context.Context, req *pb.Request, res *pb.Response) (err error) {
-	user, err := srv.Repo.Get(&userPb.User{
-		Id: req.User.Id,
-	})
-	if err != nil {
-		log.Log(err)
-		return err
-	}
-	if user != nil {
-		req.User.Id = user.Id
-		t, err := srv.TokenService.Encode(req.User)
-		if err != nil {
-			log.Log(err)
-			return err
-		}
-		res.Token = t
-	}
-	return nil
-}
-
 func (srv *Auth) Auth(ctx context.Context, req *pb.Request, res *pb.Response) (err error) {
 	fmt.Println("Auth.Auth")
 	user, err := srv.Repo.Get(&userPb.User{
@@ -82,4 +62,24 @@ func (srv *Auth) ValidateToken(ctx context.Context, req *pb.Request, res *pb.Res
 	res.User = claims.User
 	res.Valid = true
 	return err
+}
+
+func (srv *Auth) AuthById(ctx context.Context, req *pb.Request, res *pb.Response) (err error) {
+	user, err := srv.Repo.Get(&userPb.User{
+		Id: req.User.Id,
+	})
+	if err != nil {
+		log.Log(err)
+		return err
+	}
+	if user != nil {
+		req.User.Id = user.Id
+		t, err := srv.TokenService.Encode(req.User)
+		if err != nil {
+			log.Log(err)
+			return err
+		}
+		res.Token = t
+	}
+	return nil
 }
