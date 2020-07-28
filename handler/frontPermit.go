@@ -77,7 +77,7 @@ func (srv *FrontPermit) UpdateOrCreate(ctx context.Context, req *pb.Request, res
 	p.Method = req.FrontPermit.Method
 
 	frontPermit, err := srv.Repo.Get(&p)
-	if frontPermit != nil {
+	if frontPermit == nil {
 		_, err = srv.Repo.Create(req.FrontPermit)
 	} else {
 		req.FrontPermit.Id = frontPermit.Id

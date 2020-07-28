@@ -75,7 +75,7 @@ func (srv *Permission) UpdateOrCreate(ctx context.Context, req *pb.Request, res 
 	p.Service = req.Permission.Service
 	p.Method = req.Permission.Method
 	permission, err := srv.Repo.Get(&p)
-	if permission != nil {
+	if permission == nil {
 		_, err = srv.Repo.Create(req.Permission)
 	} else {
 		req.Permission.Id = permission.Id
