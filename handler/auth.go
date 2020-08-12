@@ -19,6 +19,7 @@ type Auth struct {
 
 func (srv *Auth) Auth(ctx context.Context, req *pb.Request, res *pb.Response) (err error) {
 	fmt.Println("Auth.Auth")
+	fmt.Println(req.User)
 	user, err := srv.Repo.Get(&userPb.User{
 		Id:       req.User.Id,
 		Username: req.User.Username,

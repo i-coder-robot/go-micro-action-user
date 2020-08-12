@@ -4,6 +4,7 @@ import (
 	"fmt"
 	pb "github.com/i-coder-robot/go-micro-action-user/proto/user"
 	"github.com/jinzhu/gorm"
+	"github.com/lecex/core/uitl"
 	"github.com/micro/go-micro/v2/util/log"
 )
 
@@ -21,7 +22,7 @@ type UserRepository struct {
 	DB *gorm.DB
 }
 
-func (repo UserRepository) Exist(user *pb.User) bool {
+func (repo *UserRepository) Exist(user *pb.User) bool {
 	var count int
 	if user.Username != "" {
 		repo.DB.Model(&user).Where("username= ?", user.Username).Count(&count)
@@ -44,11 +45,14 @@ func (repo UserRepository) Exist(user *pb.User) bool {
 	return false
 }
 
-func (repo UserRepository) List(req *pb.ListQuery) (users []*pb.User, err error) {
+func (repo *UserRepository) List(req *pb.ListQuery) (users []*pb.User, err error) {
+	fmt.Println(req)
 	db := repo.DB
-	limit := req.Limit
-	offset := req.Page * 10
-	sort := req.Sort
+	limit, offset := uitl.Page(req.Limit, req.Page) // 分页
+	sort := uitl.Sort(req.Sort)                     // 排序 默认 created_at desc
+	if req.Where != "" {
+		db = db.Where(req.Where)
+	}
 	//TODO 查查这个 sort，Order()方法需要什么类型
 	if err := db.Order(sort).Limit(limit).Offset(offset).Find(&users).Error; err != nil {
 		log.Log(err)
@@ -69,6 +73,7 @@ func (repo *UserRepository) Total(req *pb.ListQuery) (total int64, err error) {
 	}
 	return total, nil
 }
+
 func (repo *UserRepository) Get(user *pb.User) (*pb.User, error) {
 	if err := repo.DB.Where(&user).Find(&user).Error; err != nil {
 		return nil, err
@@ -102,6 +107,7 @@ func (repo *UserRepository) Update(user *pb.User) (bool, error) {
 	}
 	return true, nil
 }
+
 func (repo *UserRepository) Delete(user *pb.User) (bool, error) {
 	id := &pb.User{Id: user.Id}
 	err := repo.DB.Delete(id).Error

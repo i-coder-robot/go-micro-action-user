@@ -18,9 +18,11 @@ func (srv *User) Exist(ctx context.Context, req *pb.Request, res *pb.Response) (
 }
 
 func (srv *User ) List(ctx context.Context,req *pb.Request,res *pb.Response) (err error) {
+	fmt.Println(req.ListQuery)
 	users, err := srv.Repo.List(req.ListQuery)
 	total, err := srv.Repo.Total(req.ListQuery)
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 	res.Total = total

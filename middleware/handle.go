@@ -3,6 +3,7 @@ package middleware
 import (
 	"context"
 	"errors"
+	"fmt"
 	client "github.com/i-coder-robot/go-micro-action-core/client"
 	authPb "github.com/i-coder-robot/go-micro-action-user/proto/auth"
 	casbinPb "github.com/i-coder-robot/go-micro-action-user/proto/casbin"
@@ -18,10 +19,6 @@ type Handler struct {
 	Service     string
 }
 
-// Wrapper 是一个高阶函数，入参是 ”下一步“ 函数，出参是认证函数
-// 在返回的函数内部处理完认证逻辑后，再手动调用 fn() 进行下一步处理
-// token 是从 consignment-ci 上下文中取出的，再调用 user 将其做验证
-// 认证通过则 fn() 继续执行，否则报错
 func (srv *Handler) Wrapper(fn server.HandlerFunc) server.HandlerFunc {
 	return func(ctx context.Context, req server.Request, resp interface{}) (err error) {
 		if srv.IsAuth(req) {
@@ -38,11 +35,13 @@ func (srv *Handler) Wrapper(fn server.HandlerFunc) server.HandlerFunc {
 					Token: token,
 				}, authRes)
 				if err != nil || authRes.Valid == false {
+					fmt.Println("校验token失败")
 					return err
 				}
 				// 设置用户 id
 				meta["Userid"] = authRes.User.Id
 				meta["Username"] = authRes.User.Username
+				fmt.Println("从token中解析出用户名:"+authRes.User.Username)
 				meta["Email"] = authRes.User.Email
 				meta["Mobile"] = authRes.User.Mobile
 				meta["Service"] = srv.Service
@@ -53,7 +52,7 @@ func (srv *Handler) Wrapper(fn server.HandlerFunc) server.HandlerFunc {
 					casbinRes := &authPb.Response{}
 					err := client.Call(ctx, srv.UserService, "Casbin.Validate", &casbinPb.Request{}, casbinRes)
 					if err != nil || casbinRes.Valid == false {
-						return errors.New("Permission denied")
+						return errors.New("权限拒绝")
 					}
 				}
 			} else {
@@ -67,6 +66,8 @@ func (srv *Handler) Wrapper(fn server.HandlerFunc) server.HandlerFunc {
 
 // IsAuth 检测用户授权
 func (srv *Handler) IsAuth(req server.Request) bool {
+	fmt.Println("IsAuth。。。。")
+	fmt.Println(srv.Permissions)
 	for _, p := range srv.Permissions {
 		if p.Method == req.Method() && p.Auth == true {
 			srv.Service = p.Service
@@ -78,6 +79,8 @@ func (srv *Handler) IsAuth(req server.Request) bool {
 
 // IsPolicy 检查用户权限
 func (srv *Handler) IsPolicy(req server.Request) bool {
+	fmt.Println("IsPolicy.....")
+	fmt.Println(srv.Permissions)
 	for _, p := range srv.Permissions {
 		if p.Method == req.Method() && p.Policy == true {
 			return true
